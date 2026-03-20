@@ -1,0 +1,14 @@
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[len(arr) // 2]
+        less = [x for x in arr if x < pivot]
+        equal = [x for x in arr if x == pivot]
+        greater = [x for x in arr if x > pivot]
+        return quicksort(less) + equal + quicksort(greater)
+
+my_list = [3, 6, 8, 10, 1, 2, 1]
+sorted_list = quicksort(my_list)
+print(f"Original list: {my_list}")
+print(f"Sorted list: {sorted_list}")

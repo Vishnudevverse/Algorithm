@@ -1,0 +1,21 @@
+def maxSubarraySumNative(arr):
+    res = arr[0]
+    for i in range(len(arr)):
+        currSum = 0
+        for j in range(i, len(arr)):
+            currSum += arr[j]
+            res = max(res, currSum)
+    return res
+
+def maxSubarraySum(arr):
+    res = arr[0]
+    maxEnding = arr[0]
+    for i in range(1, len(arr)):
+        maxEnding = max(maxEnding + arr[i], arr[i])
+        res = max(res, maxEnding)
+    return res
+
+if __name__ == "__main__":
+    arr = [2, 3, -8, 7, -1, 2, 3]
+    print(maxSubarraySum(arr))
+    print(maxSubarraySumNative(arr))
