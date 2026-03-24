@@ -1,6 +1,7 @@
 from collections import deque
 
 
+# Level order traversal
 class Node:
     def __init__(self, val):
         self.val = val
@@ -33,21 +34,14 @@ def bfs_recursive(root):
     def traverse(node, level):
         if not node:
             return
-
-        # Ensure there is a sublist for the current level
         if len(levels) == level:
             levels.append([])
-
-        # Add current node value to its level list
         levels[level].append(node.val)
-
-        # Recursively move to children, incrementing level
         traverse(node.left, level + 1)
         traverse(node.right, level + 1)
 
     traverse(root, 0)
-
-    # Flatten the levels list for the final output
+    print(levels)
     for level_list in levels:
         for val in level_list:
             print(val, end=" ")
@@ -62,3 +56,28 @@ def print_given_level(root, level):
     elif level > 1:
         print_given_level(root.left, level - 1)
         print_given_level(root.right, level - 1)
+
+
+# Level 0 (Root)
+root = Node(1)
+
+# Level 1
+root.left = Node(2)
+root.right = Node(3)
+
+# Level 2
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+print("BFS Iterative: ", end="")
+bfs_iterative(root)
+print()
+
+print("BFS Recursive: ", end="")
+bfs_recursive(root)
+print()
+
+print("Print Given Level (3): ", end="")
+print_given_level(root, 3)
+print()

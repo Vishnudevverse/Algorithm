@@ -6,10 +6,11 @@ def binarySearch(arr, x):
         if arr[mid] == x:
             return mid
         elif arr[mid] < x:
-            low = mid + 1     
+            low = mid + 1
         else:
             high = mid - 1
     return -1
+
 
 def binarySearchRecursive(arr, low, high, x):
     if high >= low:
@@ -17,17 +18,18 @@ def binarySearchRecursive(arr, low, high, x):
         if arr[mid] == x:
             return mid
         elif arr[mid] > x:
-            return binarySearch(arr, low, mid-1, x)
+            return binarySearchRecursive(arr, low, mid - 1, x)
         else:
-            return binarySearch(arr, mid + 1, high, x)
+            return binarySearchRecursive(arr, mid + 1, high, x)
     else:
         return -1
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     arr = [2, 3, 4, 10, 40]
     x = 10
     resultItrative = binarySearch(arr, x)
-    resultRecursive = binarySearchRecursive(arr, 0, len(arr)-1, x)
+    resultRecursive = binarySearchRecursive(arr, 0, len(arr) - 1, x)
     if resultItrative != -1:
         print("Element is present at index", resultRecursive)
     else:

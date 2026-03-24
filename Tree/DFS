@@ -76,3 +76,46 @@ def post_order_iterative(root):
                 print(peek_node.val, end=" ")
                 last_visited = stack.pop()
                 curr = None
+
+
+# Level 0 (Root)
+root = Node(1)
+
+# Level 1
+root.left = Node(2)
+root.right = Node(3)
+
+# Level 2
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+#      1          <-- Level 0 (Root)
+#    /   \
+#   2     3       <-- Level 1
+#  / \   / \
+# 4   5 6   7     <-- Level 2 (Leaves)
+print("Pre-order Recursive: ", end="")
+pre_order_recursive(root)
+print()
+
+print("In-order Recursive: ", end="")
+in_order_recursive(root)
+print()
+
+print("Post-order Recursive: ", end="")
+post_order_recursive(root)
+print()
+
+print("Pre-order Iterative: ", end="")
+pre_order_iterative(root)
+print()
+
+print("In-order Iterative: ", end="")
+in_order_iterative(root)
+print()
+
+print("Post-order Iterative: ", end="")
+post_order_iterative(root)
+print()
