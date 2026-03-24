@@ -1,0 +1,64 @@
+from collections import deque
+
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def bfs_iterative(root):
+    if not root:
+        return
+
+    # Initialize queue with the root node
+    queue = deque([root])
+
+    while queue:
+        # Remove the node from the front of the queue
+        node = queue.popleft()
+        print(node.val, end=" ")
+
+        # Add children to the back of the queue (Left then Right)
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+
+
+def bfs_recursive(root):
+    levels = []
+
+    def traverse(node, level):
+        if not node:
+            return
+
+        # Ensure there is a sublist for the current level
+        if len(levels) == level:
+            levels.append([])
+
+        # Add current node value to its level list
+        levels[level].append(node.val)
+
+        # Recursively move to children, incrementing level
+        traverse(node.left, level + 1)
+        traverse(node.right, level + 1)
+
+    traverse(root, 0)
+
+    # Flatten the levels list for the final output
+    for level_list in levels:
+        for val in level_list:
+            print(val, end=" ")
+
+
+# Alternative: Recursive approach to print a specific level
+def print_given_level(root, level):
+    if not root:
+        return
+    if level == 1:
+        print(root.val, end=" ")
+    elif level > 1:
+        print_given_level(root.left, level - 1)
+        print_given_level(root.right, level - 1)
