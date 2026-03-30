@@ -69,7 +69,6 @@ def post_order_iterative(root):
             curr = curr.left
         else:
             peek_node = stack[-1]
-            # If right child exists and traversing from left child, move right
             if peek_node.right and last_visited != peek_node.right:
                 curr = peek_node.right
             else:

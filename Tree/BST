@@ -1,0 +1,61 @@
+# Node structure
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.left = None
+        self.right = None
+
+
+# Helper function to check if a tree is
+# BST within a given range
+def isBstUtil(node, min_val, max_val):
+    if node is None:
+        return True
+    if node.data < min_val or node.data > max_val:
+        return False
+    return (isBstUtil(node.left, min_val, node.data - 1) and
+            isBstUtil(node.right, node.data + 1, max_val))
+
+# Recursive Function for inorder traversal
+def inorder(root, prev):
+    if root is None:
+        return True
+
+    # Recursively check the left subtree
+    if not inorder(root.left, prev):
+        return False
+
+    # Check the current node value
+    # against the previous value
+    if prev[0] >= root.data:
+        return False
+
+    prev[0] = root.data
+
+    # Recursively check the right subtree
+    return inorder(root.right, prev)
+
+# Function to check if the entire binary tree is a BST
+def isBST(root):
+    prev = [float('-inf')]
+    return inorder(root, prev)
+
+if __name__ == "__main__":
+
+    # Create a sample binary tree
+    #     10
+    #    /  \
+    #   5    20
+    #        / \
+    #       9   25
+
+    root = Node(10)
+    root.left = Node(5)
+    root.right = Node(20)
+    root.right.left = Node(9)
+    root.right.right = Node(25)
+    if isBST(root):
+        print("true")
+    else:
+        print("false")
+    print(isBstUtil(root, float('-inf'), float('inf')))
